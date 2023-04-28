@@ -11,7 +11,7 @@
 ```lua
 require 'class'
 
--- definition of classes
+-- definition of classes, "a" beeing the required self reference
 Animal = class(function(a,name)
    a.name = name
 end)
