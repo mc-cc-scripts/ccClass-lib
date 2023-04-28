@@ -1,7 +1,8 @@
 --- Returns only the class, not in instance of it!
---- | init by _classname_(), which returns an Instance!
+---
+--- Init by _classname_(...), which returns an Instance!
 ---@source http://lua-users.org/wiki/SimpleLuaClasses
----@param base function initfunction | baseclass
+---@param base function | table initfunction | baseclass
 ---@param init function | nil new InitFunction, overrides base init
 ---@return table
 function Class(base, init)
@@ -29,7 +30,6 @@ function Class(base, init)
         if init then
             init(obj, ...)
         else
-            print("How did i get here?");
             if base and base.init then
                 base.init(obj, ...)
             end
@@ -37,10 +37,10 @@ function Class(base, init)
         return obj
     end
     c.init = init
-    c.is_a = function(self, klass)
+    c.is_a = function(self, class)
         local m = getmetatable(self)
         while m do
-            if m == klass then return true end
+            if m == class then return true end
             m = m._base
         end
         return false
